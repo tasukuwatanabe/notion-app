@@ -1,11 +1,16 @@
-import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import Box from '@mui/material/Box';
+import Content from './components/Content';
+import Sidebar from './components/Sidebar';
 
 function App() {
   return (
-    <div>
-      <h1>Hello from React</h1>
-      <Button variant="contained">Hello world</Button>
-    </div>
+    <Box sx={{ display: 'flex' }}>
+      <Sidebar />
+      <Container maxWidth={false} sx={{ maxWidth: '750px', paddingBlock: 10 }}>
+        <Content />
+      </Container>
+    </Box>
   );
 }
 
