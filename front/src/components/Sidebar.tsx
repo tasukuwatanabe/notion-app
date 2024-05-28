@@ -53,7 +53,7 @@ export default function Sidebar() {
             'Send email',
             'Drafts',
           ].map((text, index) => (
-            <ListItem key={text} disablePadding>
+            <ListItem key={text+index} disablePadding>
               <ListItemButton sx={{ paddingInline: 1 }}>
                 <ListItemIcon sx={{ minWidth: '34px' }}>
                   {index % 2 === 0 ? (
