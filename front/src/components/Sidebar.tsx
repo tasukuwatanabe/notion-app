@@ -1,3 +1,4 @@
+import { type Article } from '../type'
 import Skeleton from '@mui/material/Skeleton';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -12,7 +13,11 @@ import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
 
-export default function Sidebar() {
+type SidebarProps = {
+  articles: Article[]
+}
+
+export default function Sidebar({ articles }: SidebarProps) {
   return (
     <Drawer
       sx={{
@@ -43,17 +48,8 @@ export default function Sidebar() {
         </List>
         <Divider />
         <List>
-          {[
-            'Inbox',
-            'Starred',
-            'Send email',
-            'Drafts',
-            'Inbox',
-            'Starred',
-            'Send email',
-            'Drafts',
-          ].map((text, index) => (
-            <ListItem key={text+index} disablePadding>
+          {articles.map((article, index) => (
+            <ListItem key={`${article.title}-${index}`} disablePadding>
               <ListItemButton sx={{ paddingInline: 1 }}>
                 <ListItemIcon sx={{ minWidth: '34px' }}>
                   {index % 2 === 0 ? (
@@ -62,7 +58,7 @@ export default function Sidebar() {
                     <MailIcon sx={{ fontSize: '1.3rem' }} />
                   )}
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={article.title} />
               </ListItemButton>
             </ListItem>
           ))}
