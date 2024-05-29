@@ -13,9 +13,9 @@ export default function Content({ article }: ContentProps) {
       <Typography variant='h1' fontSize='40px' mb='30px'>
         {article.title}
       </Typography>
-      <Typography paragraph>
+      <div>
         {article.body}
-      </Typography>
+      </div>
     </>
   );
 }
