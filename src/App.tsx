@@ -1,27 +1,21 @@
 import { useEffect, useState } from 'react';
-import supabase from './lib/supabase';
-import type { Articles } from './type';
+import { Outlet } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
+
+import type { Articles } from './type';
+import { getArticles } from './utils/supabaseFunctions';
 import Sidebar from './components/Sidebar';
-import { Outlet } from 'react-router-dom';
 
 function App() {
   const [articles, setArticles] = useState<Articles>([]);
 
   useEffect(() => {
-    getArticles();
-  }, []);
-
-  const getArticles = async () => {
-    const { data: articles, error } = await supabase.from('articles').select();
-
-    if (error) {
-      console.log(error);
-    } else {
+    (async function() {
+      const articles = await getArticles()
       setArticles(articles);
-    }
-  };
+    })()
+  }, []);
 
   return (
     <Box sx={{ display: 'flex' }}>
