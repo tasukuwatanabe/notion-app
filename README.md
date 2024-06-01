@@ -2,6 +2,6 @@
 
 This is a full stack application I developed for study.
 
-- React v18
-- TypeScript v5
-- Golang v1.22
+- React v18.2.0
+- TypeScript v5.2.2
+- vite v5.2.11
