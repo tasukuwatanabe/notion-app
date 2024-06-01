@@ -12,13 +12,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const { data: articles, error } = await fetchArticles()
-
-      if (error) {
-        console.log(error)
-      } else {
-        setArticles(articles);
-      }
+      const articles = await fetchArticles()
+      setArticles(articles || []);
     })()
   }, []);
 

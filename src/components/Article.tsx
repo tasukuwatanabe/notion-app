@@ -16,15 +16,10 @@ export default function Article() {
     if (!id) return;
 
     (async () => {
-      const { data: article, error } = await fetchArticle(id);
-
-      if (error) {
-        console.log(error);
-      } else {
-        setArticle(article[0]);
-      }
+      const article = await fetchArticle(id);
+      if (article) setArticle(article)
     })();
-  });
+  }, [id]);
 
   return (
     <div>
