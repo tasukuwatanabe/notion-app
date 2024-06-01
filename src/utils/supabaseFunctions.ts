@@ -1,12 +1,16 @@
 import supabase from '../lib/supabase';
 
-export const getArticles = async () => {
-  const { data, error } = await supabase.from('articles').select();
+export const fetchArticles = async () => {
+  const articles = await supabase.from('articles').select();
 
-  if (error) {
-    console.log(error)
-    return []
-  } else {
-    return data
-  }
-}
+  return articles;
+};
+
+export const fetchArticle = async (articleId: string) => {
+  const article = await supabase
+    .from('articles')
+    .select()
+    .match({ id: articleId });
+
+  return article;
+};

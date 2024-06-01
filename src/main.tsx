@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import App from './App.tsx';
-import Articles from './components/Articles.tsx';
+import App from './App';
+import Articles from './components/Articles';
+import Article from './components/Article';
 
 const router = createBrowserRouter([
   {
@@ -11,6 +12,10 @@ const router = createBrowserRouter([
       {
         path: '/articles',
         element: <Articles />
+      },
+      {
+        path: '/articles/:id',
+        element: <Article />
       }
     ]
   }
