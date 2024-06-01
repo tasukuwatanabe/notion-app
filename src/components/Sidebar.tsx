@@ -1,21 +1,23 @@
-import { type Articles } from '../type'
+import { Link as RouterLink } from 'react-router-dom';
 import Skeleton from '@mui/material/Skeleton';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import Link from '@mui/material/Link';
 import Divider from '@mui/material/Divider';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
+
+import { type Articles } from '../type';
 
 const drawerWidth = 240;
 
 type SidebarProps = {
-  articles: Articles
-}
+  articles: Articles;
+};
 
 export default function Sidebar({ articles }: SidebarProps) {
   return (
@@ -48,20 +50,25 @@ export default function Sidebar({ articles }: SidebarProps) {
         </List>
         <Divider />
         <List>
-          {articles && articles.map((article, index) => (
-            <ListItem key={`${article.title}-${index}`} disablePadding>
-              <ListItemButton sx={{ paddingInline: 1 }}>
-                <ListItemIcon sx={{ minWidth: '34px' }}>
-                  {index % 2 === 0 ? (
-                    <InboxIcon sx={{ fontSize: '1.3rem' }} />
-                  ) : (
-                    <MailIcon sx={{ fontSize: '1.3rem' }} />
-                  )}
-                </ListItemIcon>
-                <ListItemText primary={article.title} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          {articles &&
+            articles.map((article, index) => (
+              <ListItem key={`${article.title}-${index}`} disablePadding>
+                <Link
+                  component={RouterLink}
+                  to={`/articles/${article.id}`}
+                  color='inherit'
+                  underline='none'
+                  display='block'
+                >
+                  <ListItemButton sx={{ paddingInline: 1 }}>
+                    <ListItemIcon sx={{ minWidth: '34px' }}>
+                      <InboxIcon sx={{ fontSize: '1.3rem' }} />
+                    </ListItemIcon>
+                    <ListItemText primary={article.title} />
+                  </ListItemButton>
+                </Link>
+              </ListItem>
+            ))}
         </List>
       </Box>
     </Drawer>
