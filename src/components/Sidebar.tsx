@@ -10,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
+import AddCircleIcon from '@mui/icons-material/AddCircle';
 
 import { type Articles } from '../type';
 
@@ -70,6 +71,21 @@ export default function Sidebar({ articles }: SidebarProps) {
               </ListItem>
             ))}
         </List>
+        <Divider />
+        <Link
+          component={RouterLink}
+          to='/articles/new'
+          color='inherit'
+          underline='none'
+          display='block'
+        >
+          <ListItemButton sx={{ paddingInline: 1 }}>
+            <ListItemIcon sx={{ minWidth: '34px' }}>
+              <AddCircleIcon sx={{ fontSize: '1.3rem' }} />
+            </ListItemIcon>
+            <ListItemText primary='New Article' />
+          </ListItemButton>
+        </Link>
       </Box>
     </Drawer>
   );

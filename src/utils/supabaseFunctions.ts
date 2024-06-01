@@ -1,10 +1,10 @@
 import supabase from '../lib/supabase';
 
 export const fetchArticles = async () => {
-  const { data: articles, error } = await supabase.from('articles').select();
+  const { data: articles, error } = await supabase.from('articles').select().order('id', { ascending: false });
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return;
   }
 
@@ -24,5 +24,26 @@ export const fetchArticle = async (articleId: string) => {
 
   if (article.length > 0) {
     return article[0];
+  }
+};
+
+type insertingArticle = {
+  title: string;
+  body?: string;
+};
+
+export const insertArticle = async (NewArticle: insertingArticle) => {
+  const { data, error } = await supabase
+    .from('articles')
+    .insert(NewArticle)
+    .select('id')
+
+  if (error) {
+    console.log(error);
+    return
+  }
+
+  if (data.length > 0) {
+    return data[0].id;
   }
 };

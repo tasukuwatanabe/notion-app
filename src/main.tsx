@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import App from './App';
 import Articles from './components/Articles';
 import Article from './components/Article';
+import Form from './components/Form';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
       {
         path: 'articles/:id',
         element: <Article />,
+      },
+      {
+        path: 'articles/new',
+        element: <Form />,
       },
     ],
   },
