@@ -1,7 +1,10 @@
 import supabase from '../lib/supabase';
 
 export const fetchArticles = async () => {
-  const { data: articles, error } = await supabase.from('articles').select().order('id', { ascending: false });
+  const { data: articles, error } = await supabase
+    .from('articles')
+    .select()
+    .order('id', { ascending: false });
 
   if (error) {
     console.log(error);
@@ -18,13 +21,11 @@ export const fetchArticle = async (articleId: string) => {
     .match({ id: articleId });
 
   if (error) {
-    console.log(error); // TODO: ここで404エラーを発生させたい
+    console.log(error)
     return;
   }
 
-  if (article.length > 0) {
-    return article[0];
-  }
+  return article[0];
 };
 
 type insertingArticle = {
@@ -36,14 +37,12 @@ export const insertArticle = async (NewArticle: insertingArticle) => {
   const { data, error } = await supabase
     .from('articles')
     .insert(NewArticle)
-    .select('id')
+    .select();
 
   if (error) {
     console.log(error);
-    return
+    return;
   }
 
-  if (data.length > 0) {
-    return data[0].id;
-  }
+  return data[0];
 };

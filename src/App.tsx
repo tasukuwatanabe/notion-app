@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
-import type { Articles } from './type';
+import type { Articles, Article } from './type';
 import { fetchArticles } from './utils/supabaseFunctions';
 import Sidebar from './components/Sidebar';
 
@@ -13,10 +13,14 @@ import { insertArticle } from './utils/supabaseFunctions';
 
 function App() {
   const [articles, setArticles] = useState<Articles>([]);
+  const [article, setArticle] = useState<Article>({
+    id: 0,
+    title: '',
+    body: ''
+  })
 
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
-  const [insertedArticleId, setInsertedArticleId] = useState<string>('')
 
   const navigate = useNavigate()
 
@@ -31,13 +35,13 @@ function App() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement> ) => {
     e.preventDefault();
 
-    const id = await insertArticle({title, body})
+    const insertedArticle = await insertArticle({title, body})
 
-    if (id) {
+    if (insertedArticle) {
       setTitle('')
       setBody('')
-      setInsertedArticleId(id)
-      navigate(`/articles/${id}`)
+      setArticle(insertedArticle)
+      navigate(`/articles/${insertedArticle.id}`, { state: { insertedArticle }})
     }
   };
 
@@ -46,7 +50,7 @@ function App() {
       const articles = await fetchArticles()
       setArticles(articles || []);
     })()
-  }, [insertedArticleId]);
+  }, [article]);
 
   return (
     <Box sx={{ display: 'flex' }}>

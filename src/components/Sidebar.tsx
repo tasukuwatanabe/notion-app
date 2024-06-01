@@ -59,6 +59,7 @@ export default function Sidebar({ articles }: SidebarProps) {
                   to={`/articles/${article.id}`}
                   color='inherit'
                   underline='none'
+                  width='100%'
                 >
                   <ListItemButton sx={{ paddingInline: 1 }}>
                     <ListItemIcon sx={{ minWidth: '34px' }}>
