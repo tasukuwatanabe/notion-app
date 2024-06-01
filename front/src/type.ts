@@ -4,4 +4,4 @@ export type Article = {
   body?: string;
 };
 
-export type ArticlesContext = { articles: Article[] };
+export type Articles = Article[] | null;

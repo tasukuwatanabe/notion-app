@@ -1,4 +1,4 @@
-import { type Article } from '../type'
+import { type Articles } from '../type'
 import Skeleton from '@mui/material/Skeleton';
 import Drawer from '@mui/material/Drawer';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ import MailIcon from '@mui/icons-material/Mail';
 const drawerWidth = 240;
 
 type SidebarProps = {
-  articles: Article[]
+  articles: Articles
 }
 
 export default function Sidebar({ articles }: SidebarProps) {
@@ -48,7 +48,7 @@ export default function Sidebar({ articles }: SidebarProps) {
         </List>
         <Divider />
         <List>
-          {articles.map((article, index) => (
+          {articles && articles.map((article, index) => (
             <ListItem key={`${article.title}-${index}`} disablePadding>
               <ListItemButton sx={{ paddingInline: 1 }}>
                 <ListItemIcon sx={{ minWidth: '34px' }}>
