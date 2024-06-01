@@ -59,7 +59,6 @@ export default function Sidebar({ articles }: SidebarProps) {
                   to={`/articles/${article.id}`}
                   color='inherit'
                   underline='none'
-                  display='block'
                 >
                   <ListItemButton sx={{ paddingInline: 1 }}>
                     <ListItemIcon sx={{ minWidth: '34px' }}>
@@ -77,7 +76,7 @@ export default function Sidebar({ articles }: SidebarProps) {
           to='/articles/new'
           color='inherit'
           underline='none'
-          display='block'
+          width='100%'
         >
           <ListItemButton sx={{ paddingInline: 1 }}>
             <ListItemIcon sx={{ minWidth: '34px' }}>
