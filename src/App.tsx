@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import supabase from './supabase';
+import supabase from './lib/supabase';
 import type { Articles } from './type';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
