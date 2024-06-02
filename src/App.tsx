@@ -9,6 +9,7 @@ import {
   fetchArticles,
   insertArticle,
   updateArticle,
+  deleteArticle
 } from './utils/supabaseFunctions';
 import Sidebar from './components/Sidebar';
 
@@ -61,6 +62,18 @@ function App() {
     }
   };
 
+  const handleDelete = async () => {
+    if (!articleId) return;
+
+    const statusMessage = await deleteArticle(articleId)
+
+    if (statusMessage === 'deleted') {
+      navigate('/articles')
+      const fetchedArticles = await fetchArticles();
+      setArticles(fetchedArticles || []);
+    }
+  }
+
   useEffect(() => {
     (async () => {
       const fetchedArticles = await fetchArticles();
@@ -95,6 +108,7 @@ function App() {
             handleInputTitle,
             handleInputBody,
             handleSubmit,
+            handleDelete
           }}
         />
       </Container>

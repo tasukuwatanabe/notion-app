@@ -63,3 +63,14 @@ export const updateArticle = async ({ id, title, body}: Article) => {
 
   return data[0];
 };
+
+export const deleteArticle = async (id: string) => {
+  const { error } = await supabase.from('articles').delete().match({ id })
+
+  if (error) {
+    console.log(error)
+    return;
+  }
+
+  return 'deleted';
+}

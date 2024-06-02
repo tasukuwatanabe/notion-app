@@ -8,10 +8,11 @@ import type { Article } from '../type';
 type FormContext = {
   title: string;
   body: string;
+  handleDelete: () => void
 };
 
 export default function Article() {
-  const { title, body } = useOutletContext<FormContext>();
+  const { title, body, handleDelete } = useOutletContext<FormContext>();
   const { articleId } = useParams();
 
   return (
@@ -24,6 +25,7 @@ export default function Article() {
             <Link to={`/articles/${articleId}/edit`}>
               <Button variant='outlined'>Edit</Button>
             </Link>
+            <Button variant='outlined' onClick={handleDelete}>Delete</Button>
           </Stack>
         </Stack>
       ) : (
