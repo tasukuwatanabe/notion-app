@@ -31,6 +31,11 @@ function App() {
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!title) {
+      alert("Article title can't be empty");
+      return;
+    }
+
     if (articleId) {
       // update
       const updatedArticle = await updateArticle({
