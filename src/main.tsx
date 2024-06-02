@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
+import './main.css'
 import App from './App';
 import Articles from './components/Articles';
 import Article from './components/Article';
