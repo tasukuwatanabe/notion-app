@@ -9,6 +9,7 @@ import Form from './components/Form';
 
 const router = createBrowserRouter([
   {
+    path: '',
     element: <App />,
     children: [
       {

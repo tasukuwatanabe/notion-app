@@ -1,5 +1,5 @@
 import { useEffect, useState, type FormEvent, type ChangeEvent } from 'react';
-import { useNavigate, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 import { Outlet } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -20,6 +20,7 @@ function App() {
 
   const { articleId } = useParams();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -75,6 +76,8 @@ function App() {
   }
 
   useEffect(() => {
+    if (pathname === '/') navigate('/articles');
+
     (async () => {
       const fetchedArticles = await fetchArticles();
       setArticles(fetchedArticles || []);
@@ -92,7 +95,7 @@ function App() {
         setBody('');
       }
     })();
-  }, [articleId]);
+  }, [pathname]);
 
   return (
     <Box sx={{ display: 'flex' }}>
