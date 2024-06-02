@@ -1,28 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent, type ChangeEvent } from 'react';
+import { useNavigate, useParams } from 'react-router';
 import { Outlet } from 'react-router-dom';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
 
-import type { Articles, Article } from './type';
-import { fetchArticles } from './utils/supabaseFunctions';
+import type { Articles } from './type';
+import {
+  fetchArticles,
+  insertArticle,
+  updateArticle,
+} from './utils/supabaseFunctions';
 import Sidebar from './components/Sidebar';
-
-import { type FormEvent, type ChangeEvent } from 'react';
-import { useNavigate } from 'react-router';
-import { insertArticle } from './utils/supabaseFunctions';
 
 function App() {
   const [articles, setArticles] = useState<Articles>([]);
-  const [article, setArticle] = useState<Article>({
-    id: 0,
-    title: '',
-    body: ''
-  })
-
   const [title, setTitle] = useState<string>('');
   const [body, setBody] = useState<string>('');
 
-  const navigate = useNavigate()
+  const { articleId } = useParams();
+  const navigate = useNavigate();
 
   const handleInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -32,38 +28,70 @@ function App() {
     setBody(e.target.value);
   };
 
-  const handleSubmit = async (e: FormEvent<HTMLFormElement> ) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const insertedArticle = await insertArticle({title, body})
+    if (articleId) {
+      // update
+      const updatedArticle = await updateArticle({
+        id: articleId,
+        title,
+        body,
+      });
 
-    if (insertedArticle) {
-      setTitle('')
-      setBody('')
-      setArticle(insertedArticle)
-      navigate(`/articles/${insertedArticle.id}`, { state: { insertedArticle }})
+      if (updatedArticle) {
+        navigate(`/articles/${updatedArticle.id}`);
+        const fetchedArticles = await fetchArticles();
+        setArticles(fetchedArticles || []);
+      }
+    } else {
+      // create
+      const createdArticle = await insertArticle({ title, body });
+
+      if (createdArticle) {
+        navigate(`/articles/${createdArticle.id}`);
+        const fetchedArticles = await fetchArticles();
+        setArticles(fetchedArticles || []);
+      }
     }
   };
 
   useEffect(() => {
     (async () => {
-      const articles = await fetchArticles()
-      setArticles(articles || []);
-    })()
-  }, [article]);
+      const fetchedArticles = await fetchArticles();
+      setArticles(fetchedArticles || []);
+
+      if (articleId) {
+        const matched = fetchedArticles?.filter(
+          (article) => article.id === Number(articleId)
+        )[0];
+        if (matched) {
+          setTitle(matched.title);
+          setBody(matched.body);
+        }
+      } else {
+        setTitle('');
+        setBody('');
+      }
+    })();
+  }, [articleId]);
 
   return (
     <Box sx={{ display: 'flex' }}>
       <Sidebar articles={articles} />
       <Container maxWidth={false} sx={{ maxWidth: '750px', paddingBlock: 10 }}>
-        <Outlet context={{
-          articles,
-          title,
-          body,
-          handleInputTitle,
-          handleInputBody,
-          handleSubmit
-        }} />
+        <Outlet
+          context={{
+            articles,
+            title,
+            setTitle,
+            body,
+            setBody,
+            handleInputTitle,
+            handleInputBody,
+            handleSubmit,
+          }}
+        />
       </Container>
     </Box>
   );

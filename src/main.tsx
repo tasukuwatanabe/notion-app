@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
 import App from './App';
 import Articles from './components/Articles';
 import Article from './components/Article';
@@ -15,11 +16,15 @@ const router = createBrowserRouter([
         element: <Articles />,
       },
       {
-        path: 'articles/:id',
+        path: 'articles/:articleId',
         element: <Article />,
       },
       {
         path: 'articles/new',
+        element: <Form />,
+      },
+      {
+        path: 'articles/:articleId/edit',
         element: <Form />,
       },
     ],

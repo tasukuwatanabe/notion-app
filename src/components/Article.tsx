@@ -1,36 +1,31 @@
-import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router';
+import { useOutletContext, useParams } from 'react-router';
+import { Link } from 'react-router-dom';
+import Button from '@mui/material/Button';
+import { Stack } from '@mui/system';
 
 import type { Article } from '../type';
-import { fetchArticle } from '../utils/supabaseFunctions';
+
+type FormContext = {
+  title: string;
+  body: string;
+};
 
 export default function Article() {
-  const [article, setArticle] = useState<Article | null>({
-    id: 0,
-    title: '',
-    body: '',
-  });
-  const { id } = useParams();
-  const { state } = useLocation();
-
-  useEffect(() => {
-    if (state) {
-      setArticle(state.insertedArticle)
-    } else {
-      (async () => {
-        const article = await fetchArticle(id!);
-        setArticle(article || null);
-      })();
-    }
-  }, [id]);
+  const { title, body } = useOutletContext<FormContext>();
+  const { articleId } = useParams();
 
   return (
     <>
-      {article ? (
-        <div>
-          <h1>{article.title}</h1>
-          <div>{article.body}</div>
-        </div>
+      {title ? (
+        <Stack spacing={2}>
+          <h1>{title}</h1>
+          <div>{body}</div>
+          <Stack direction='row' spacing={1}>
+            <Link to={`/articles/${articleId}/edit`}>
+              <Button variant='outlined'>Edit</Button>
+            </Link>
+          </Stack>
+        </Stack>
       ) : (
         <div>Not Found</div>
       )}

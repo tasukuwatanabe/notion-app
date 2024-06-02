@@ -1,5 +1,12 @@
 import supabase from '../lib/supabase';
 
+
+type Article = {
+  id?: string;
+  title: string;
+  body: string;
+};
+
 export const fetchArticles = async () => {
   const { data: articles, error } = await supabase
     .from('articles')
@@ -28,15 +35,25 @@ export const fetchArticle = async (articleId: string) => {
   return article[0];
 };
 
-type insertingArticle = {
-  title: string;
-  body?: string;
-};
-
-export const insertArticle = async (NewArticle: insertingArticle) => {
+export const insertArticle = async (newArticle: Article) => {
   const { data, error } = await supabase
     .from('articles')
-    .insert(NewArticle)
+    .insert(newArticle)
+    .select();
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  return data[0];
+};
+
+export const updateArticle = async ({ id, title, body}: Article) => {
+  const { data, error } = await supabase
+    .from('articles')
+    .update({ title, body })
+    .eq('id', id)
     .select();
 
   if (error) {
