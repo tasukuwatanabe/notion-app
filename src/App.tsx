@@ -1,8 +1,6 @@
 import { useEffect, useState, type FormEvent, type ChangeEvent } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { Outlet } from 'react-router-dom';
-import Container from '@mui/material/Container';
-import Box from '@mui/material/Box';
 
 import type { Articles } from './type';
 import {
@@ -98,9 +96,10 @@ function App() {
   }, [pathname]);
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <div>
       <Sidebar articles={articles} />
-      <Container maxWidth={false} sx={{ maxWidth: '750px', paddingBlock: 10 }}>
+      <div>
+        <p className='text-red-500 font-bold'>Hello World</p>
         <Outlet
           context={{
             articles,
@@ -114,8 +113,8 @@ function App() {
             handleDelete
           }}
         />
-      </Container>
-    </Box>
+      </div>
+    </div>
   );
 }
 

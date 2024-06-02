@@ -1,6 +1,4 @@
 import { type Article } from '../type';
-import CssBaseline from '@mui/material/CssBaseline';
-import Typography from '@mui/material/Typography';
 
 type ContentProps = {
   article: Article;
@@ -9,10 +7,9 @@ type ContentProps = {
 export default function Content({ article }: ContentProps) {
   return (
     <>
-      <CssBaseline />
-      <Typography variant='h1' fontSize='40px' mb='30px'>
+      <div>
         {article.title}
-      </Typography>
+      </div>
       <div>
         {article.body}
       </div>

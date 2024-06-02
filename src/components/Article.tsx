@@ -1,7 +1,5 @@
 import { useOutletContext, useParams } from 'react-router';
 import { Link } from 'react-router-dom';
-import Button from '@mui/material/Button';
-import { Stack } from '@mui/system';
 
 import type { Article } from '../type';
 
@@ -18,16 +16,16 @@ export default function Article() {
   return (
     <>
       {title ? (
-        <Stack spacing={2}>
+        <div>
           <h1>{title}</h1>
           <div>{body}</div>
-          <Stack direction='row' spacing={1}>
+          <div>
             <Link to={`/articles/${articleId}/edit`}>
-              <Button variant='outlined'>Edit</Button>
+              <button>Edit</button>
             </Link>
-            <Button variant='outlined' onClick={handleDelete}>Delete</Button>
-          </Stack>
-        </Stack>
+            <button onClick={handleDelete}>Delete</button>
+          </div>
+        </div>
       ) : (
         <div>Not Found</div>
       )}
