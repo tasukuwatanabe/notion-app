@@ -2,6 +2,7 @@ import { useEffect, useState, type FormEvent, type ChangeEvent } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router';
 import { Outlet } from 'react-router-dom';
 
+import { Button } from './components/ui/button';
 import type { Articles } from './type';
 import {
   fetchArticles,
@@ -99,6 +100,7 @@ function App() {
     <div>
       <Sidebar articles={articles} />
       <div>
+        <Button>Click me</Button>
         <p className='text-red-500 font-bold'>Hello World</p>
         <Outlet
           context={{
