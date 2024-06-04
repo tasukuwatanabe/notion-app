@@ -10,6 +10,7 @@ import {
   updateArticle,
   deleteArticle,
 } from "./utils/supabaseFunctions";
+import RootLayout from "./layouts/Root";
 import Sidebar from "./components/Sidebar";
 
 function App() {
@@ -83,7 +84,7 @@ function App() {
 
       if (articleId) {
         const matched = fetchedArticles?.filter(
-          (article) => article.id === Number(articleId),
+          (article) => article.id === Number(articleId)
         )[0];
         if (matched) {
           setTitle(matched.title);
@@ -97,7 +98,7 @@ function App() {
   }, [pathname]);
 
   return (
-    <div>
+    <RootLayout>
       <Sidebar articles={articles} />
       <div>
         <Button>Click me</Button>
@@ -116,7 +117,7 @@ function App() {
           }}
         />
       </div>
-    </div>
+    </RootLayout>
   );
 }
 
