@@ -9,7 +9,7 @@ import {
   insertArticle,
   updateArticle,
   deleteArticle,
-} from "./utils/supabaseFunctions";
+} from "./lib/supabase";
 import RootLayout from "./layouts/Root";
 import Sidebar from "./components/Sidebar";
 
