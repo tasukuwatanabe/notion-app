@@ -1,4 +1,4 @@
-import { useOutletContext } from 'react-router';
+import { useOutletContext } from "react-router";
 
 type FormContext = {
   title: string;
@@ -14,18 +14,16 @@ export default function Form() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input id='title' type='text' onChange={handleInputTitle} value={title} />
+      <input id="title" type="text" onChange={handleInputTitle} value={title} />
       <textarea
-        name=''
-        id=''
+        name=""
+        id=""
         rows={10}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         onChange={handleInputBody}
         value={body}
       />
-      <button type='submit'>
-        Submit
-      </button>
+      <button type="submit">Submit</button>
     </form>
   );
 }

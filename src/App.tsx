@@ -1,21 +1,21 @@
-import { useEffect, useState, type FormEvent, type ChangeEvent } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router';
-import { Outlet } from 'react-router-dom';
+import { useEffect, useState, FormEvent, ChangeEvent } from "react";
+import { useLocation, useNavigate, useParams } from "react-router";
+import { Outlet } from "react-router-dom";
 
-import { Button } from './components/ui/button';
-import type { Articles } from './type';
+import { Button } from "./components/ui/button";
+import type { Articles } from "./type";
 import {
   fetchArticles,
   insertArticle,
   updateArticle,
-  deleteArticle
-} from './utils/supabaseFunctions';
-import Sidebar from './components/Sidebar';
+  deleteArticle,
+} from "./utils/supabaseFunctions";
+import Sidebar from "./components/Sidebar";
 
 function App() {
   const [articles, setArticles] = useState<Articles>([]);
-  const [title, setTitle] = useState<string>('');
-  const [body, setBody] = useState<string>('');
+  const [title, setTitle] = useState<string>("");
+  const [body, setBody] = useState<string>("");
 
   const { articleId } = useParams();
   const navigate = useNavigate();
@@ -65,17 +65,17 @@ function App() {
   const handleDelete = async () => {
     if (!articleId) return;
 
-    const statusMessage = await deleteArticle(articleId)
+    const statusMessage = await deleteArticle(articleId);
 
-    if (statusMessage === 'deleted') {
-      navigate('/articles')
+    if (statusMessage === "deleted") {
+      navigate("/articles");
       const fetchedArticles = await fetchArticles();
       setArticles(fetchedArticles || []);
     }
-  }
+  };
 
   useEffect(() => {
-    if (pathname === '/') navigate('/articles');
+    if (pathname === "/") navigate("/articles");
 
     (async () => {
       const fetchedArticles = await fetchArticles();
@@ -83,15 +83,15 @@ function App() {
 
       if (articleId) {
         const matched = fetchedArticles?.filter(
-          (article) => article.id === Number(articleId)
+          (article) => article.id === Number(articleId),
         )[0];
         if (matched) {
           setTitle(matched.title);
           setBody(matched.body);
         }
       } else {
-        setTitle('');
-        setBody('');
+        setTitle("");
+        setBody("");
       }
     })();
   }, [pathname]);
@@ -101,7 +101,7 @@ function App() {
       <Sidebar articles={articles} />
       <div>
         <Button>Click me</Button>
-        <p className='text-red-500 font-bold'>Hello World</p>
+        <p className="text-red-500 font-bold">Hello World</p>
         <Outlet
           context={{
             articles,
@@ -112,7 +112,7 @@ function App() {
             handleInputTitle,
             handleInputBody,
             handleSubmit,
-            handleDelete
+            handleDelete,
           }}
         />
       </div>

@@ -1,12 +1,12 @@
-import { useOutletContext, useParams } from 'react-router';
-import { Link } from 'react-router-dom';
+import { useOutletContext, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
-import type { Article } from '../type';
+import type { Article } from "../type";
 
 type FormContext = {
   title: string;
   body: string;
-  handleDelete: () => void
+  handleDelete: () => void;
 };
 
 export default function Article() {

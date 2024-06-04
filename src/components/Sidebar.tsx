@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-import { type Articles } from '../type';
+import { type Articles } from "../type";
 
 type SidebarProps = {
   articles: Articles;
@@ -16,7 +16,7 @@ export default function Sidebar({ articles }: SidebarProps) {
               <Link to={`/articles/${article.id}`}>{article.title}</Link>
             </div>
           ))}
-        <Link to='/articles/new'>New Article</Link>
+        <Link to="/articles/new">New Article</Link>
       </div>
     </div>
   );

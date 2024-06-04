@@ -1,4 +1,4 @@
-import { type Article } from '../type';
+import { type Article } from "../type";
 
 type ContentProps = {
   article: Article;
@@ -7,12 +7,8 @@ type ContentProps = {
 export default function Content({ article }: ContentProps) {
   return (
     <>
-      <div>
-        {article.title}
-      </div>
-      <div>
-        {article.body}
-      </div>
+      <div>{article.title}</div>
+      <div>{article.body}</div>
     </>
   );
 }

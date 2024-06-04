@@ -1,5 +1,4 @@
-import supabase from '../lib/supabase';
-
+import supabase from "../lib/supabase";
 
 type Article = {
   id?: string;
@@ -9,9 +8,9 @@ type Article = {
 
 export const fetchArticles = async () => {
   const { data: articles, error } = await supabase
-    .from('articles')
+    .from("articles")
     .select()
-    .order('id', { ascending: false });
+    .order("id", { ascending: false });
 
   if (error) {
     console.log(error);
@@ -23,12 +22,12 @@ export const fetchArticles = async () => {
 
 export const fetchArticle = async (articleId: string) => {
   const { data: article, error } = await supabase
-    .from('articles')
+    .from("articles")
     .select()
     .match({ id: articleId });
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return;
   }
 
@@ -37,7 +36,7 @@ export const fetchArticle = async (articleId: string) => {
 
 export const insertArticle = async (newArticle: Article) => {
   const { data, error } = await supabase
-    .from('articles')
+    .from("articles")
     .insert(newArticle)
     .select();
 
@@ -49,11 +48,11 @@ export const insertArticle = async (newArticle: Article) => {
   return data[0];
 };
 
-export const updateArticle = async ({ id, title, body}: Article) => {
+export const updateArticle = async ({ id, title, body }: Article) => {
   const { data, error } = await supabase
-    .from('articles')
+    .from("articles")
     .update({ title, body })
-    .eq('id', id)
+    .eq("id", id)
     .select();
 
   if (error) {
@@ -65,12 +64,12 @@ export const updateArticle = async ({ id, title, body}: Article) => {
 };
 
 export const deleteArticle = async (id: string) => {
-  const { error } = await supabase.from('articles').delete().match({ id })
+  const { error } = await supabase.from("articles").delete().match({ id });
 
   if (error) {
-    console.log(error)
+    console.log(error);
     return;
   }
 
-  return 'deleted';
-}
+  return "deleted";
+};
