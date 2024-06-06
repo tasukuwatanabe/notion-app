@@ -1,5 +1,5 @@
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { Outlet } from "react-router-dom";
 
 import { Button } from "./components/ui/button";
@@ -20,7 +20,7 @@ function App() {
 
   const { articleId } = useParams();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
+  // const { pathname } = useLocation();
 
   const handleInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -76,7 +76,7 @@ function App() {
   };
 
   useEffect(() => {
-    if (pathname === "/") navigate("/articles");
+    // if (pathname === "/") navigate("/articles");
 
     (async () => {
       const fetchedArticles = await fetchArticles();
@@ -95,10 +95,12 @@ function App() {
         setBody("");
       }
     })();
-  }, [pathname]);
+  }, []);
 
   return (
     <RootLayout>
+      <meta name="keywords" content="React" />
+      <meta name="description" content="A React website" />
       <Sidebar articles={articles} />
       <div>
         <Button>Click me</Button>
