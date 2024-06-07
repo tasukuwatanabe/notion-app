@@ -101,10 +101,8 @@ function App() {
     <RootLayout>
       <meta name="keywords" content="React" />
       <meta name="description" content="A React website" />
-      <Sidebar articles={articles} />
+      {/* <Sidebar articles={articles} /> */}
       <div>
-        <Button>Click me</Button>
-        <p className="text-red-500 font-bold">Hello World</p>
         <Outlet
           context={{
             articles,
