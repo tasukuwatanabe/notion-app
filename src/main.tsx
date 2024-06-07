@@ -9,6 +9,8 @@ import Articles from "./pages/Articles";
 import Article from "./pages/Article";
 import NewArticle from "./pages/NewArticle";
 import EditArticle from "./pages/EditArticle";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,14 @@ const router = createBrowserRouter([
       {
         path: "articles/:articleId/edit",
         element: <EditArticle />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "register",
+        element: <Register />,
       },
     ],
   },
