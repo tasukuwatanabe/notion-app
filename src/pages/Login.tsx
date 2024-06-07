@@ -1,3 +1,5 @@
+import MainLayout from "../components/layout/Main";
+
 export default function Login() {
-  return <div>Login</div>;
+  return <MainLayout>Login</MainLayout>
 }

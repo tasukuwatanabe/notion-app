@@ -1,3 +1,5 @@
+import MainLayout from "../components/layout/Main";
+
 export default function Register() {
-  return <div>Register</div>;
+  return <MainLayout>Register</MainLayout>
 }

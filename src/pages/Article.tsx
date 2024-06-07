@@ -1,6 +1,7 @@
 import { useOutletContext, useParams } from "react-router";
 import { Link } from "react-router-dom";
 
+import MainLayout from "../components/layout/Main";
 import type { Article } from "../type";
 
 type FormContext = {
@@ -14,7 +15,7 @@ export default function Article() {
   const { articleId } = useParams();
 
   return (
-    <>
+    <MainLayout>
       {title ? (
         <div>
           <h1>{title}</h1>
@@ -29,6 +30,6 @@ export default function Article() {
       ) : (
         <div>Not Found</div>
       )}
-    </>
+    </MainLayout>
   );
 }

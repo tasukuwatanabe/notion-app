@@ -1,8 +1,7 @@
 import { useEffect, useState, FormEvent, ChangeEvent } from "react";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams, useLocation } from "react-router";
 import { Outlet } from "react-router-dom";
 
-import { Button } from "./components/ui/button";
 import type { Articles } from "./type";
 import {
   fetchArticles,
@@ -10,8 +9,6 @@ import {
   updateArticle,
   deleteArticle,
 } from "./lib/supabase";
-import RootLayout from "./layouts/Root";
-import Sidebar from "./components/Sidebar";
 
 function App() {
   const [articles, setArticles] = useState<Articles>([]);
@@ -20,7 +17,7 @@ function App() {
 
   const { articleId } = useParams();
   const navigate = useNavigate();
-  // const { pathname } = useLocation();
+  const { pathname } = useLocation();
 
   const handleInputTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -95,29 +92,22 @@ function App() {
         setBody("");
       }
     })();
-  }, []);
+  }, [pathname]);
 
   return (
-    <RootLayout>
-      <meta name="keywords" content="React" />
-      <meta name="description" content="A React website" />
-      {/* <Sidebar articles={articles} /> */}
-      <div>
-        <Outlet
-          context={{
-            articles,
-            title,
-            setTitle,
-            body,
-            setBody,
-            handleInputTitle,
-            handleInputBody,
-            handleSubmit,
-            handleDelete,
-          }}
-        />
-      </div>
-    </RootLayout>
+    <Outlet
+      context={{
+        articles,
+        title,
+        setTitle,
+        body,
+        setBody,
+        handleInputTitle,
+        handleInputBody,
+        handleSubmit,
+        handleDelete,
+      }}
+    />
   );
 }
 

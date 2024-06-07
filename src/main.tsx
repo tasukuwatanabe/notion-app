@@ -7,7 +7,8 @@ import App from "./App";
 import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import Article from "./pages/Article";
-import Form from "./components/Form";
+import NewArticle from "./pages/NewArticle";
+import EditArticle from "./pages/EditArticle";
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,11 @@ const router = createBrowserRouter([
       },
       {
         path: "articles/new",
-        element: <Form />,
+        element: <NewArticle />,
       },
       {
         path: "articles/:articleId/edit",
-        element: <Form />,
+        element: <EditArticle />,
       },
     ],
   },
