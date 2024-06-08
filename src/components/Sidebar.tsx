@@ -1,12 +1,14 @@
-import { Link } from "react-router-dom";
+import { Link, useOutletContext } from "react-router-dom";
 
 import { type Articles } from "../type";
 
-type SidebarProps = {
+type ArticlesContext = {
   articles: Articles;
 };
 
-export default function Sidebar({ articles }: SidebarProps) {
+export default function Sidebar() {
+  const { articles } = useOutletContext<ArticlesContext>();
+
   return (
     <div>
       <div>
