@@ -4,13 +4,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import "./main.css";
 import App from "./App";
-import Home from "./pages/Home";
 import Articles from "./pages/Articles";
 import Article from "./pages/Article";
 import NewArticle from "./pages/NewArticle";
 import EditArticle from "./pages/EditArticle";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
+import Marketing from "./pages/Marketing";
 
 const router = createBrowserRouter([
   {
@@ -18,7 +18,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "",
-        element: <Home />,
+        element: <Marketing />,
       },
       {
         path: "articles",
